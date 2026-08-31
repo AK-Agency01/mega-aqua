@@ -1,7 +1,6 @@
 ```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +8,7 @@
 <title>ميكامار + أكوابورا</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
@@ -32,7 +28,7 @@ body{
 }
 
 .brand{
-    font-family:Georgia,serif;
+    font-family:Georgia,"Times New Roman",serif;
     font-size:15px;
     letter-spacing:3px;
     color:#8d7448;
@@ -56,7 +52,7 @@ body{
 
 .product{
     text-align:center;
-    padding:25px 10px 8px;
+    padding:24px 10px 8px;
 }
 
 .product h1{
@@ -152,13 +148,8 @@ textarea{
     margin-top:12px;
 }
 
-.error{
-    color:#c62828;
-}
-
-.warning{
-    color:#8a6d1d;
-}
+.error{color:#c62828}
+.warning{color:#8a6d1d}
 
 .whatsapp{
     position:fixed;
@@ -184,7 +175,6 @@ textarea{
     font-size:10px;
     padding:28px 10px;
 }
-
 </style>
 </head>
 
@@ -193,14 +183,10 @@ textarea{
 <div class="container">
 
 <header class="header">
-    <div class="brand">
-        ORIGINAL PERFUMES
-    </div>
+    <div class="brand">ORIGINAL PERFUMES</div>
 </header>
 
-
-<!-- VIDEO -->
-
+<!-- الفيديو -->
 <div class="video-box">
 
     <video
@@ -208,26 +194,16 @@ textarea{
         playsinline
         preload="metadata"
     >
-
-        <source
-            src="video.mp4"
-            type="video/mp4"
-        >
-
+        <source src="video.mp4" type="video/mp4">
         متصفحك لا يدعم تشغيل الفيديو.
-
     </video>
 
 </div>
 
-
-<!-- PRODUCT -->
-
+<!-- تفاصيل العطر -->
 <section class="product">
 
-    <h1>
-        ميكامار + أكوابورا
-    </h1>
+    <h1>ميكامار + أكوابورا</h1>
 
     <div class="price">
         45,000 د.ع
@@ -239,12 +215,10 @@ textarea{
 
 </section>
 
-
-<!-- ORDER -->
-
+<!-- نموذج الطلب -->
 <div class="order-card">
 
-    <label>
+    <label for="phone">
         رقم الهاتف
     </label>
 
@@ -256,7 +230,7 @@ textarea{
         placeholder="077XXXXXXXX"
     >
 
-    <label>
+    <label for="address">
         العنوان الكامل
     </label>
 
@@ -273,13 +247,9 @@ textarea{
         اطلب الآن
     </button>
 
-    <div
-        id="message"
-        class="message"
-    ></div>
+    <div id="message" class="message"></div>
 
 </div>
-
 
 <div class="footer">
     التوصيل متوفر لجميع محافظات العراق
@@ -287,9 +257,7 @@ textarea{
 
 </div>
 
-
-<!-- WHATSAPP -->
-
+<!-- واتساب -->
 <a
     class="whatsapp"
     href="https://wa.me/9647775037750"
@@ -302,9 +270,9 @@ textarea{
 
 <script>
 
-/* =====================================================
+/* ================================
    TELEGRAM
-===================================================== */
+================================ */
 
 const TELEGRAM_TOKEN =
 "7602821198:AAHHrMz_Ny9BtNf2TLqHTJHZxD_UbUiMsME";
@@ -313,53 +281,49 @@ const CHAT_ID =
 "-1002694463022";
 
 
-/* =====================================================
-   24 HOUR LIMIT
-===================================================== */
+/* ================================
+   منع الطلب أكثر من مرة خلال 24 ساعة
+   على نفس الجهاز
+================================ */
 
-const ORDER_STORAGE_KEY =
-"perfume_last_order_time";
+const STORAGE_KEY =
+"last_order_time";
 
-const TWENTY_FOUR_HOURS =
+const LIMIT =
 24 * 60 * 60 * 1000;
 
+let sending = false;
 
-/* =====================================================
-   CHECK ORDER
-===================================================== */
 
-function hasRecentOrder(){
+/* ================================
+   التحقق من آخر طلب
+================================ */
 
-    const lastOrder =
-        localStorage.getItem(
-            ORDER_STORAGE_KEY
-        );
+function recentOrder(){
 
-    if(!lastOrder){
+    const last =
+        localStorage.getItem(STORAGE_KEY);
+
+    if(!last){
         return false;
     }
 
     const elapsed =
-        Date.now() - Number(lastOrder);
+        Date.now() - Number(last);
 
-    if(elapsed < TWENTY_FOUR_HOURS){
+    if(elapsed < LIMIT){
         return true;
     }
 
-    localStorage.removeItem(
-        ORDER_STORAGE_KEY
-    );
+    localStorage.removeItem(STORAGE_KEY);
 
     return false;
 }
 
 
-/* =====================================================
-   SEND ORDER
-===================================================== */
-
-let sending = false;
-
+/* ================================
+   إرسال الطلب
+================================ */
 
 async function sendOrder(){
 
@@ -368,32 +332,26 @@ async function sendOrder(){
     }
 
     const phone =
-        document
-        .getElementById("phone")
-        .value
-        .trim();
+        document.getElementById("phone")
+        .value.trim();
 
     const address =
-        document
-        .getElementById("address")
-        .value
-        .trim();
+        document.getElementById("address")
+        .value.trim();
 
     const message =
-        document
-        .getElementById("message");
+        document.getElementById("message");
 
     const button =
-        document
-        .getElementById("orderButton");
+        document.getElementById("orderButton");
 
 
     message.textContent = "";
 
 
-    /* 24 HOURS */
+    /* منع الطلب خلال 24 ساعة */
 
-    if(hasRecentOrder()){
+    if(recentOrder()){
 
         message.className =
             "message warning";
@@ -405,7 +363,7 @@ async function sendOrder(){
     }
 
 
-    /* PHONE */
+    /* التحقق من الرقم */
 
     if(phone.length < 10){
 
@@ -419,7 +377,7 @@ async function sendOrder(){
     }
 
 
-    /* ADDRESS */
+    /* التحقق من العنوان */
 
     if(address.length < 5){
 
@@ -441,32 +399,23 @@ async function sendOrder(){
         "⏳ جاري إرسال الطلب...";
 
 
-    /* =================================================
-       TELEGRAM MESSAGE
-    ================================================= */
+    /* ================================
+       رسالة التليگرام
+    ================================= */
 
     const text =
 
-`━━━━━━━━━━━━━━━━━━
-🔥 طلب جديد
-━━━━━━━━━━━━━━━━━━
+`🔥 طلب جديد
 
-🌸 العرض:
-ميكامار + أكوابورا
+🌸 العرض: ميكامار + أكوابورا
 
-💰 السعر:
-45,000 د.ع
+💰 السعر: 45,000 د.ع
 
-🚚 التوصيل:
-مجاني
+🚚 التوصيل: مجاني
 
-📞 رقم الهاتف:
-${phone}
+📞 الرقم: ${phone}
 
-📍 العنوان:
-${address}
-
-━━━━━━━━━━━━━━━━━━`;
+📍 العنوان: ${address}`;
 
 
     try{
@@ -474,7 +423,9 @@ ${address}
         const response =
             await fetch(
 
-                `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
+                "https://api.telegram.org/bot" +
+                TELEGRAM_TOKEN +
+                "/sendMessage",
 
                 {
                     method:"POST",
@@ -486,11 +437,9 @@ ${address}
 
                     body:JSON.stringify({
 
-                        chat_id:
-                        CHAT_ID,
+                        chat_id:CHAT_ID,
 
-                        text:
-                        text
+                        text:text
 
                     })
 
@@ -503,12 +452,14 @@ ${address}
             await response.json();
 
 
-        /* SUCCESS */
+        /* ================================
+           نجاح
+        ================================= */
 
         if(data.ok){
 
             localStorage.setItem(
-                ORDER_STORAGE_KEY,
+                STORAGE_KEY,
                 Date.now().toString()
             );
 
@@ -520,6 +471,7 @@ ${address}
 
 
         throw new Error(
+            data.description ||
             "Telegram Error"
         );
 
@@ -532,7 +484,7 @@ ${address}
             "message error";
 
         message.textContent =
-            "تعذر إرسال الطلب، حاول مرة أخرى.";
+            "فشل إرسال الطلب. حاول مرة أخرى.";
 
         button.disabled = false;
 
@@ -540,7 +492,6 @@ ${address}
             "اطلب الآن";
 
         sending = false;
-
     }
 
 }
@@ -548,6 +499,5 @@ ${address}
 </script>
 
 </body>
-
 </html>
 ```
