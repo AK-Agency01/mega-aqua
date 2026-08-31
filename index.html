@@ -1,6 +1,6 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,36 +8,51 @@
 <title>ميكامار + أكوابورا</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
 
 body{
-    margin:0;
     background:#f5f2ed;
     color:#171717;
     font-family:Tahoma,Arial,sans-serif;
 }
 
 .container{
-    width:min(500px,calc(100% - 24px));
-    margin:auto;
+    width:100%;
+    max-width:500px;
+    margin:0 auto;
+    padding:0 14px 25px;
 }
+
+/* LOGO */
 
 .header{
     text-align:center;
-    padding:22px 10px 14px;
+    padding:25px 5px 18px;
 }
 
 .brand{
     font-family:Georgia,"Times New Roman",serif;
-    font-size:15px;
-    letter-spacing:3px;
-    color:#8d7448;
+    font-size:16px;
+    letter-spacing:4px;
+    color:#92784a;
 }
+
+/* VIDEO */
 
 .video-box{
     width:100%;
     background:#111;
-    border-radius:20px;
+    border-radius:22px;
     overflow:hidden;
     box-shadow:0 12px 35px rgba(0,0,0,.18);
 }
@@ -46,25 +61,27 @@ body{
     display:block;
     width:100%;
     height:auto;
-    max-height:680px;
+    max-height:700px;
     object-fit:cover;
 }
 
+/* PRODUCT */
+
 .product{
     text-align:center;
-    padding:24px 10px 8px;
+    padding:25px 8px 5px;
 }
 
 .product h1{
     margin:0;
     font-family:Georgia,"Times New Roman",serif;
+    font-size:31px;
     font-weight:normal;
-    font-size:32px;
-    line-height:1.4;
+    line-height:1.5;
 }
 
 .price{
-    margin-top:10px;
+    margin-top:9px;
     font-size:27px;
     font-weight:bold;
 }
@@ -72,7 +89,7 @@ body{
 .delivery{
     display:inline-block;
     margin-top:12px;
-    padding:9px 16px;
+    padding:9px 17px;
     background:#eee7d9;
     color:#735c35;
     border-radius:30px;
@@ -80,32 +97,46 @@ body{
     font-weight:bold;
 }
 
+/* ORDER */
+
 .order-card{
-    background:#fff;
     margin-top:20px;
-    padding:20px;
-    border-radius:20px;
+    background:#fff;
+    border-radius:21px;
+    padding:21px;
     box-shadow:0 8px 28px rgba(0,0,0,.08);
 }
 
 label{
     display:block;
     margin-bottom:7px;
-    font-size:12px;
     color:#555;
+    font-size:12px;
 }
 
 input,
 textarea{
     width:100%;
     border:1px solid #ddd5c8;
-    border-radius:11px;
+    border-radius:12px;
     background:#faf9f7;
     padding:14px;
+    margin:0 0 16px;
+
     font-family:Tahoma,Arial,sans-serif;
     font-size:15px;
+
     outline:none;
-    margin-bottom:15px;
+    color:#171717;
+}
+
+input{
+    height:50px;
+}
+
+textarea{
+    min-height:105px;
+    resize:none;
 }
 
 input:focus,
@@ -114,22 +145,23 @@ textarea:focus{
     background:#fff;
 }
 
-textarea{
-    min-height:100px;
-    resize:none;
-}
-
 .order-button{
     width:100%;
+    height:54px;
+
     border:0;
     border-radius:13px;
-    padding:17px;
+
     background:#171717;
     color:#fff;
+
     font-family:Tahoma,Arial,sans-serif;
     font-size:17px;
     font-weight:bold;
+
     cursor:pointer;
+
+    transition:.15s ease;
 }
 
 .order-button:active{
@@ -137,131 +169,185 @@ textarea{
 }
 
 .order-button:disabled{
-    opacity:.6;
+    opacity:.65;
     cursor:not-allowed;
 }
 
+/* MESSAGE */
+
 .message{
     text-align:center;
+    margin-top:13px;
     font-size:13px;
     line-height:1.8;
-    margin-top:12px;
 }
 
-.error{color:#c62828}
-.warning{color:#8a6d1d}
+.error{
+    color:#c62828;
+}
+
+.warning{
+    color:#8a6d1d;
+}
+
+/* WHATSAPP */
 
 .whatsapp{
     position:fixed;
+
     left:18px;
     bottom:18px;
+
     width:58px;
     height:58px;
+
     border-radius:50%;
+
     background:#25D366;
     color:#fff;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-decoration:none;
-    font-size:27px;
+
+    font-size:28px;
+
     box-shadow:0 6px 20px rgba(0,0,0,.25);
+
     z-index:9999;
 }
+
+/* FOOTER */
 
 .footer{
     text-align:center;
     color:#999;
     font-size:10px;
-    padding:28px 10px;
+    padding:25px 5px 5px;
 }
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<header class="header">
-    <div class="brand">ORIGINAL PERFUMES</div>
-</header>
+    <!-- BRAND -->
 
-<!-- الفيديو -->
-<div class="video-box">
+    <header class="header">
 
-    <video
-        controls
-        playsinline
-        preload="metadata"
-    >
-        <source src="video.mp4" type="video/mp4">
-        متصفحك لا يدعم تشغيل الفيديو.
-    </video>
+        <div class="brand">
+            ORIGINAL PERFUMES
+        </div>
 
-</div>
+    </header>
 
-<!-- تفاصيل العطر -->
-<section class="product">
 
-    <h1>ميكامار + أكوابورا</h1>
+    <!-- VIDEO -->
 
-    <div class="price">
-        45,000 د.ع
+    <div class="video-box">
+
+        <video
+            controls
+            playsinline
+            preload="metadata"
+        >
+
+            <source
+                src="video.mp4"
+                type="video/mp4"
+            >
+
+            متصفحك لا يدعم تشغيل الفيديو.
+
+        </video>
+
     </div>
 
-    <div class="delivery">
-        🚚 التوصيل مجاني لجميع محافظات العراق
+
+    <!-- PRODUCT -->
+
+    <section class="product">
+
+        <h1>
+            ميكامار + أكوابورا
+        </h1>
+
+        <div class="price">
+            45,000 د.ع
+        </div>
+
+        <div class="delivery">
+            🚚 التوصيل مجاني لجميع محافظات العراق
+        </div>
+
+    </section>
+
+
+    <!-- ORDER FORM -->
+
+    <div class="order-card">
+
+        <label for="phone">
+            رقم الهاتف
+        </label>
+
+        <input
+            id="phone"
+            type="tel"
+            inputmode="numeric"
+            autocomplete="tel"
+            maxlength="11"
+            placeholder="077XXXXXXXX"
+        >
+
+
+        <label for="address">
+            العنوان الكامل
+        </label>
+
+        <textarea
+            id="address"
+            placeholder="المحافظة، المنطقة، أقرب نقطة..."
+        ></textarea>
+
+
+        <button
+            id="orderButton"
+            class="order-button"
+            type="button"
+            onclick="sendOrder()"
+        >
+            اطلب الآن
+        </button>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
     </div>
 
-</section>
 
-<!-- نموذج الطلب -->
-<div class="order-card">
-
-    <label for="phone">
-        رقم الهاتف
-    </label>
-
-    <input
-        id="phone"
-        type="tel"
-        inputmode="numeric"
-        autocomplete="tel"
-        placeholder="077XXXXXXXX"
-    >
-
-    <label for="address">
-        العنوان الكامل
-    </label>
-
-    <textarea
-        id="address"
-        placeholder="المحافظة، المنطقة، أقرب نقطة..."
-    ></textarea>
-
-    <button
-        id="orderButton"
-        class="order-button"
-        onclick="sendOrder()"
-    >
-        اطلب الآن
-    </button>
-
-    <div id="message" class="message"></div>
+    <div class="footer">
+        التوصيل متوفر لجميع محافظات العراق
+    </div>
 
 </div>
 
-<div class="footer">
-    التوصيل متوفر لجميع محافظات العراق
-</div>
 
-</div>
+<!-- WHATSAPP -->
 
-<!-- واتساب -->
 <a
     class="whatsapp"
     href="https://wa.me/9647775037750"
     target="_blank"
+    rel="noopener"
     aria-label="WhatsApp"
 >
     ☎
@@ -270,9 +356,9 @@ textarea{
 
 <script>
 
-/* ================================
-   TELEGRAM
-================================ */
+/* =====================================================
+   TELEGRAM SETTINGS
+===================================================== */
 
 const TELEGRAM_TOKEN =
 "7602821198:AAHHrMz_Ny9BtNf2TLqHTJHZxD_UbUiMsME";
@@ -281,25 +367,24 @@ const CHAT_ID =
 "-1002694463022";
 
 
-/* ================================
-   منع الطلب أكثر من مرة خلال 24 ساعة
-   على نفس الجهاز
-================================ */
+/* =====================================================
+   24 HOUR DEVICE LIMIT
+===================================================== */
 
 const STORAGE_KEY =
 "last_order_time";
 
-const LIMIT =
+const TWENTY_FOUR_HOURS =
 24 * 60 * 60 * 1000;
 
 let sending = false;
 
 
-/* ================================
-   التحقق من آخر طلب
-================================ */
+/* =====================================================
+   CHECK LAST ORDER
+===================================================== */
 
-function recentOrder(){
+function hasRecentOrder(){
 
     const last =
         localStorage.getItem(STORAGE_KEY);
@@ -311,7 +396,7 @@ function recentOrder(){
     const elapsed =
         Date.now() - Number(last);
 
-    if(elapsed < LIMIT){
+    if(elapsed < TWENTY_FOUR_HOURS){
         return true;
     }
 
@@ -321,9 +406,44 @@ function recentOrder(){
 }
 
 
-/* ================================
-   إرسال الطلب
-================================ */
+/* =====================================================
+   NORMALIZE IRAQI PHONE
+===================================================== */
+
+function normalizePhone(value){
+
+    let phone =
+        value
+        .replace(/\s+/g,"")
+        .replace(/-/g,"")
+        .replace(/[^\d+]/g,"");
+
+
+    /* 00964XXXXXXXXXX */
+
+    if(phone.startsWith("00964")){
+        phone =
+            "0" +
+            phone.substring(5);
+    }
+
+
+    /* +964XXXXXXXXXX */
+
+    if(phone.startsWith("+964")){
+        phone =
+            "0" +
+            phone.substring(4);
+    }
+
+
+    return phone;
+}
+
+
+/* =====================================================
+   SEND ORDER
+===================================================== */
 
 async function sendOrder(){
 
@@ -331,13 +451,12 @@ async function sendOrder(){
         return;
     }
 
-    const phone =
-        document.getElementById("phone")
-        .value.trim();
 
-    const address =
-        document.getElementById("address")
-        .value.trim();
+    const phoneInput =
+        document.getElementById("phone");
+
+    const addressInput =
+        document.getElementById("address");
 
     const message =
         document.getElementById("message");
@@ -346,12 +465,21 @@ async function sendOrder(){
         document.getElementById("orderButton");
 
 
+    let phone =
+        normalizePhone(
+            phoneInput.value.trim()
+        );
+
+    const address =
+        addressInput.value.trim();
+
+
     message.textContent = "";
 
 
-    /* منع الطلب خلال 24 ساعة */
+    /* 24 HOURS */
 
-    if(recentOrder()){
+    if(hasRecentOrder()){
 
         message.className =
             "message warning";
@@ -363,21 +491,21 @@ async function sendOrder(){
     }
 
 
-    /* التحقق من الرقم */
+    /* PHONE */
 
-    if(phone.length < 10){
+    if(!/^07\d{9}$/.test(phone)){
 
         message.className =
             "message error";
 
         message.textContent =
-            "يرجى إدخال رقم هاتف صحيح.";
+            "يرجى إدخال رقم عراقي صحيح مكون من 11 رقم.";
 
         return;
     }
 
 
-    /* التحقق من العنوان */
+    /* ADDRESS */
 
     if(address.length < 5){
 
@@ -391,6 +519,8 @@ async function sendOrder(){
     }
 
 
+    /* START */
+
     sending = true;
 
     button.disabled = true;
@@ -399,23 +529,22 @@ async function sendOrder(){
         "⏳ جاري إرسال الطلب...";
 
 
-    /* ================================
-       رسالة التليگرام
-    ================================= */
+    /* =================================================
+       TELEGRAM MESSAGE
+    ================================================= */
 
     const text =
-
 `🔥 طلب جديد
 
 🌸 العرض: ميكامار + أكوابورا
-
 💰 السعر: 45,000 د.ع
-
 🚚 التوصيل: مجاني
 
-📞 الرقم: ${phone}
+📞 رقم الهاتف:
+${phone}
 
-📍 العنوان: ${address}`;
+📍 العنوان:
+${address}`;
 
 
     try{
@@ -437,9 +566,11 @@ async function sendOrder(){
 
                     body:JSON.stringify({
 
-                        chat_id:CHAT_ID,
+                        chat_id:
+                        CHAT_ID,
 
-                        text:text
+                        text:
+                        text
 
                     })
 
@@ -452,16 +583,21 @@ async function sendOrder(){
             await response.json();
 
 
-        /* ================================
-           نجاح
-        ================================= */
+        /* =================================================
+           TELEGRAM SUCCESS
+        ================================================= */
 
         if(data.ok){
+
+            /* حفظ وقت الطلب */
 
             localStorage.setItem(
                 STORAGE_KEY,
                 Date.now().toString()
             );
+
+
+            /* الانتقال للنجاح */
 
             window.location.href =
                 "success.html";
@@ -469,6 +605,13 @@ async function sendOrder(){
             return;
         }
 
+
+        /* Telegram Error */
+
+        console.error(
+            "Telegram Error:",
+            data
+        );
 
         throw new Error(
             data.description ||
@@ -484,7 +627,7 @@ async function sendOrder(){
             "message error";
 
         message.textContent =
-            "فشل إرسال الطلب. حاول مرة أخرى.";
+            "فشل إرسال الطلب، تأكد من اتصال الإنترنت وحاول مرة أخرى.";
 
         button.disabled = false;
 
@@ -499,5 +642,5 @@ async function sendOrder(){
 </script>
 
 </body>
+
 </html>
-```
