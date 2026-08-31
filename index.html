@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -185,7 +186,6 @@ textarea{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -193,11 +193,9 @@ textarea{
 <div class="container">
 
 <header class="header">
-
     <div class="brand">
         ORIGINAL PERFUMES
     </div>
-
 </header>
 
 
@@ -258,7 +256,6 @@ textarea{
         placeholder="077XXXXXXXX"
     >
 
-
     <label>
         العنوان الكامل
     </label>
@@ -268,7 +265,6 @@ textarea{
         placeholder="المحافظة، المنطقة، أقرب نقطة..."
     ></textarea>
 
-
     <button
         id="orderButton"
         class="order-button"
@@ -276,7 +272,6 @@ textarea{
     >
         اطلب الآن
     </button>
-
 
     <div
         id="message"
@@ -308,12 +303,14 @@ textarea{
 <script>
 
 /* =====================================================
-   CLOUDFLARE WORKER URL
-   غيّر هذا الرابط بعد إنشاء الـ Worker
+   TELEGRAM
 ===================================================== */
 
-const TELEGRAM_API =
-    "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
+const TELEGRAM_TOKEN =
+"7602821198:AAHHrMz_Ny9BtNf2TLqHTJHZxD_UbUiMsME";
+
+const CHAT_ID =
+"-1002694463022";
 
 
 /* =====================================================
@@ -321,14 +318,14 @@ const TELEGRAM_API =
 ===================================================== */
 
 const ORDER_STORAGE_KEY =
-    "perfume_last_order_time";
+"perfume_last_order_time";
 
 const TWENTY_FOUR_HOURS =
-    24 * 60 * 60 * 1000;
+24 * 60 * 60 * 1000;
 
 
 /* =====================================================
-   CHECK RECENT ORDER
+   CHECK ORDER
 ===================================================== */
 
 function hasRecentOrder(){
@@ -370,13 +367,11 @@ async function sendOrder(){
         return;
     }
 
-
     const phone =
         document
         .getElementById("phone")
         .value
         .trim();
-
 
     const address =
         document
@@ -384,11 +379,9 @@ async function sendOrder(){
         .value
         .trim();
 
-
     const message =
         document
         .getElementById("message");
-
 
     const button =
         document
@@ -449,14 +442,40 @@ async function sendOrder(){
 
 
     /* =================================================
-       SEND TO CLOUDFLARE WORKER
+       TELEGRAM MESSAGE
     ================================================= */
+
+    const text =
+
+`━━━━━━━━━━━━━━━━━━
+🔥 طلب جديد
+━━━━━━━━━━━━━━━━━━
+
+🌸 العرض:
+ميكامار + أكوابورا
+
+💰 السعر:
+45,000 د.ع
+
+🚚 التوصيل:
+مجاني
+
+📞 رقم الهاتف:
+${phone}
+
+📍 العنوان:
+${address}
+
+━━━━━━━━━━━━━━━━━━`;
+
 
     try{
 
         const response =
             await fetch(
-                TELEGRAM_API,
+
+                `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`,
+
                 {
                     method:"POST",
 
@@ -467,20 +486,16 @@ async function sendOrder(){
 
                     body:JSON.stringify({
 
-                        product:
-                            "ميكامار + أكوابورا",
+                        chat_id:
+                        CHAT_ID,
 
-                        price:
-                            "45,000 د.ع",
-
-                        phone:
-                            phone,
-
-                        address:
-                            address
+                        text:
+                        text
 
                     })
+
                 }
+
             );
 
 
@@ -488,31 +503,25 @@ async function sendOrder(){
             await response.json();
 
 
-        if(!data.ok){
+        /* SUCCESS */
 
-            throw new Error(
-                "Order failed"
+        if(data.ok){
+
+            localStorage.setItem(
+                ORDER_STORAGE_KEY,
+                Date.now().toString()
             );
 
+            window.location.href =
+                "success.html";
+
+            return;
         }
 
 
-        /* =============================================
-           SAVE ORDER TIME
-        ============================================= */
-
-        localStorage.setItem(
-            ORDER_STORAGE_KEY,
-            Date.now().toString()
+        throw new Error(
+            "Telegram Error"
         );
-
-
-        /* =============================================
-           SUCCESS PAGE
-        ============================================= */
-
-        window.location.href =
-            "success.html";
 
 
     }catch(error){
@@ -541,3 +550,4 @@ async function sendOrder(){
 </body>
 
 </html>
+```
